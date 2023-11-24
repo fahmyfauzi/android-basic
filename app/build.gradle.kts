@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.androidbasics"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.androidbasics"
@@ -66,4 +66,11 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    val work_version = "2.8.0"
+    // Kotlin + coroutines
+    implementation("androidx.work:work-runtime-ktx:$work_version")
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
+    implementation("androidx.compose.runtime:runtime-livedata:1.4.3")
 }
