@@ -1,5 +1,7 @@
 package com.example.androidbasics
 
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,8 +15,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.androidbasics.ui.theme.AndroidBasicsTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val airPlaneModeReceiver = AirPlaneModeReceiver()
+    private val testReceiver = TestReceiver()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        registerReceiver(
+            airPlaneModeReceiver,
+            IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        )
+        registerReceiver(
+            testReceiver,
+            IntentFilter("TEST_ACTION")
+        )
         setContent {
             AndroidBasicsTheme {
                 // A surface container using the 'background' color from the theme
@@ -26,6 +41,12 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(airPlaneModeReceiver)
+        unregisterReceiver(testReceiver)
     }
 }
 
